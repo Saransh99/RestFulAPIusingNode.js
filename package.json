@@ -1,0 +1,27 @@
+{
+  "name": "restfulapiusingnode",
+  "version": "1.0.0",
+  "description": "this is the first RESTful API using the node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saransh99/RestFulAPIusingNode.js.git"
+  },
+  "author": "Saransh Pal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saransh99/RestFulAPIusingNode.js/issues"
+  },
+  "homepage": "https://github.com/Saransh99/RestFulAPIusingNode.js#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.3.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.6"
+  }
+}
