@@ -3,6 +3,7 @@ we will add more alter
 this RESTful api is made using the express 
 tested with mocha 
 deployed with herokou
+database used is: MongoDB
 also used the postman to test the api
 
 // all the dependencies of a node module is directly stored in the node_modules folder 
@@ -69,8 +70,79 @@ this organizes the hierarchial configurations for your apps deployments
 --> now we can easily enable and disable debugging in the cmd only without commenting or deleting the debugging statements 
 --> if we want to set the env variable and then run the app at the same time we use the shorthand as (DEBUG=app:startup nodemon index.js)
 
-
-
 ---> Template engine (Pug)
+
+--> How to import the data in the mongodb using the cmd in the windows
+mongoimport --db <db name here> --collection <collection name here> --file <file through which the data is imported> --jsonArray (only if the data is in the array format)
+
+---> example of using the mongoose in the node.js
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/playgroundDb', {'useNewUrlParser':true})
+    .then(()=>{console.log('connected to the mongodb...')})
+    .catch(err=>console.error('cant connect to the mongodb', err));
+
+    // we use the schema in the mongoose to shape the documents in the mongodb collections
+
+const movieSchema = new mongoose.Schema({
+    name:String,
+    director:String,
+    releaseDate:{type:Date, default:Date.now},
+    tags:[String],
+    isReleased:Boolean
+});
+
+const Film = mongoose.model('Films', movieSchema);
+
+async function createFilm(){
+    const film = new Film({
+        name:'ET',
+        director:'Steven Spielberg',
+        tags:['drama','classic','sci-fi'],
+        isReleased:true    
+    });
+    
+    const result = await film.save();
+    console.log(result);
+}
+
+// operators in the mongoose 
+/*  eq(equal)
+    ne(not equal)
+    gt(greater than)
+    gte((greater than or equal to ))
+    lt(less than)
+    --> the logical operators include the or,and
+*/
+async function getFilms(){
+    const films = await Film
+        // -------- how to use the logical operators in the mongoose
+        // .find()
+        // .or([{director:'Steven Spielberg'},{isReleased:true}])
+        // .and([{director:'Steven Spielberg'},{isReleased:true}])
+        
+        // --- how to use the regex in the mongoose
+        // .find({director:/^Steven/})  // if the starts with
+        // .find({director:/Spielberg$/})  // if the query ends with
+        // .find ({director:/.*Steven.*/}) // we can have any no. of chars btw the query
+        
+        //.count()  to count the no. of documents
+        .find({director:'Steven Spielberg', isReleased:true})
+        
+        .limit(10)
+        .sort({name:1})  // 1 means ascending order
+        .select({name:1, tags:1});
+
+    console.log(films); 
+}
+
+getFilms();
+createFilm();
+
+
+
+
+
 
 
