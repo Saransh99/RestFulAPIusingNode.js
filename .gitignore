@@ -1,6 +1,5 @@
 node_modules/
-config/custom-environment-variables.json
-config/default.json
+config/
 app.js
 exercise-data.json
 hash.js
