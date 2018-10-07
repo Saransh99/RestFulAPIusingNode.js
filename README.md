@@ -140,6 +140,22 @@ async function getFilms(){
 getFilms();
 createFilm();
 
+--> the objectId in the mongoose:-
+
+the objectId in the mongodb is of 12 bytes
+we can use the objectId to generate the timeStamp 
+
+ex:- const id = new mongoose.Types.ObjectId();
+console.log(id.getTimeStamp());
+
+
+----> JSON WEB TOKEN (JWT:-  
+
+it is a long string 
+3Parts:-
+1. header:- this contains the algorithm information and the type of the string 
+2. Payload:- this contains some general info about the user
+3. verify signature:- digital signature, this is created usting the sceret key so the hacking is not possible 
 
 
 

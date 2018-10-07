@@ -1,3 +1,5 @@
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const {Genre, validate} = require('../models/genre');
 const express = require('express');
 const router = express.Router();
@@ -18,8 +20,10 @@ router.get('/:id', async (req,res)=>{
     res.send(genre);
 });
 
-router.post('/', async (req,res)=>{
+// * applyng the auth middleware to the post req only
+router.post('/', auth, async (req,res)=>{
 
+    
     const {error} = validate(req.body);
     if(error){
         return res.status(400).send(result.error.details[0].message);
@@ -55,8 +59,8 @@ router.put('/:id',async (req,res)=>{
     res.send(genre);
 
 });
-
-router.delete('/:id',async(req,res)=>{
+// * these middleware will act in the seq
+router.delete('/:id',[auth, admin], async(req,res)=>{
     // check for the course
     // if not exist then 404
     // delete

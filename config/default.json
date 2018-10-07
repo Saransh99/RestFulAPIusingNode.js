@@ -1,3 +1,4 @@
 {
-    "name":"RESTful API"
+    "name":"RESTful API",
+    "jwtPrivateKey":""
 }

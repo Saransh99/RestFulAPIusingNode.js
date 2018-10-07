@@ -1,5 +1,7 @@
 const express = require('express');
 const config = require('config');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const app = express();
 const logger = require('./middleware/logger');
 const helmet = require('helmet');
@@ -9,7 +11,16 @@ const genres = require('./routes/genres');
 const home = require('./routes/home');
 const customers = require('./routes/customers');
 const movies = require('./routes/movies');
+const rentals = require('./routes/rentals');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 const mongoose = require('mongoose');
+
+if(!config.get('jwtPrivateKey')){
+    console.error('FATAL error: jwtPrivateKey is not present');
+    process.exit(1); // 0 when the process is success any other then it failed 
+
+}
 
 mongoose.connect('mongodb://localhost/boxoffice',{useNewUrlParser:true})
     .then(()=>console.log('connected to the mongodb..orignal'))
@@ -32,6 +43,9 @@ app.use(helmet());
 app.use('/api/genres',genres);
 app.use('/api/customers',customers);
 app.use('/api/movies', movies);
+app.use('/api/rentals', rentals);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 app.use('/',home);
 
 //debug(`Application name: ${config.get('name')}`);
