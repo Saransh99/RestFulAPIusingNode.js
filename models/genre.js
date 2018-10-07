@@ -3,24 +3,27 @@ const mongoose = require('mongoose');
 
 // ! this is the model definition of the Course model in the mongoose 
 
-const Course = mongoose.model('Course',new mongoose.Schema({
+const genreSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true,
         minlength:5,
         maxlength:60
     }
-}));
+});
 
-function validateCourse(course){
+const Genre = mongoose.model('Genre', genreSchema);
+
+function validateGenre(genre){
     const schema = {
         name:Joi.string().min(3).max(30).required()
     };
 
-    return result = Joi.validate(course, schema);
+    return result = Joi.validate(genre, schema);
     
 }
 
-exports.Course = Course;
-exports.validate = validateCourse
+exports.genreSchema = genreSchema;
+exports.Genre = Genre;
+exports.validate = validateGenre;
 

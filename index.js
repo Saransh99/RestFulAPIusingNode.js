@@ -5,12 +5,13 @@ const logger = require('./middleware/logger');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const debug = require('debug')('app:startup');
-const courses = require('./routes/courses');
+const genres = require('./routes/genres');
 const home = require('./routes/home');
 const customers = require('./routes/customers');
+const movies = require('./routes/movies');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/coursesDB',{useNewUrlParser:true})
+mongoose.connect('mongodb://localhost/boxoffice',{useNewUrlParser:true})
     .then(()=>console.log('connected to the mongodb..orignal'))
     .catch(err=>console.error('cant connect to the mongodb',err)); 
 
@@ -28,8 +29,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public')); 
 app.use(logger);
 app.use(helmet());
-app.use('/api/courses',courses);
+app.use('/api/genres',genres);
 app.use('/api/customers',customers);
+app.use('/api/movies', movies);
 app.use('/',home);
 
 //debug(`Application name: ${config.get('name')}`);
