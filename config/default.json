@@ -1,0 +1,5 @@
+{
+    "name":"RESTful API",
+    "jwtPrivateKey":"",
+    "db":"mongodb://localhost/boxoffice"
+}

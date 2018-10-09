@@ -157,8 +157,21 @@ it is a long string
 2. Payload:- this contains some general info about the user
 3. verify signature:- digital signature, this is created usting the sceret key so the hacking is not possible 
 
+---->> TESTING <-----
 
+<==>Unit test:- 
+1. tests a unit of an application without its external dependencies 
+2. cheap to write and fast to execute 
 
+<==>Integration test
+1. test the application with its external dependencies
+2. take longer to test 
+
+For the unit teting we are using the jest framework 
+
+--> in the unit testing we just test the particular function in the given module without the dependencies 
+--> so to test the functions we write the mock functions in the unit testing 
+-> we should avoid writing too many mock functions instead of that we should write the integration test 
 
 
 

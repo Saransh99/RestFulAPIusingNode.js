@@ -4,7 +4,11 @@
   "description": "this is the first RESTful API using the node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "8.11.3"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,7 @@
   "homepage": "https://github.com/Saransh99/RestFulAPIusingNode.js#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "compression": "^1.7.3",
     "config": "^2.0.1",
     "debug": "^4.0.1",
     "express": "^4.16.3",
@@ -37,6 +42,8 @@
     "winston-mongodb": "^4.0.3"
   },
   "devDependencies": {
-    "jshint": "^2.9.6"
+    "jest": "^23.6.0",
+    "jshint": "^2.9.6",
+    "supertest": "^3.3.0"
   }
 }

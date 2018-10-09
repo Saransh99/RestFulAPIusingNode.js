@@ -9,6 +9,7 @@ require('./startup/routes')(app);
 require('./startup/db')();
 require('./startup/config')();
 require('./startup/validation')();
+require('./startup/prod')(app);
 
 app.set('view engine','pug');
 app.set('views','./views');
@@ -26,6 +27,9 @@ if(app.get('env')==='development'){
     app.use(morgan('tiny'));
     debug('Morgan enabled..');
 }
+// winston.info can also be used instead of the console.log
 
-//const port = process.env.PORT || 3000;
-app.listen(3000, ()=>console.log(`listening on the port 3000..`)); // * check for the winston.info
+const port = process.env.PORT || 3000;
+const server = app.listen(port, ()=>console.log(`listening on the port ${port}..`)); 
+
+module.exports = server;

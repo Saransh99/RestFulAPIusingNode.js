@@ -1,3 +1,4 @@
+const validateObjectId = require('../middleware/validateObjectId');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const {Genre, validate} = require('../models/genre');
@@ -11,8 +12,8 @@ router.get('/', async (req,res)=>{
     res.send(genres);
 });
 
-router.get('/:id',async (req,res)=>{
-
+router.get('/:id', validateObjectId, async (req,res)=>{
+    
     const genre = await Genre.findById(req.params.id);
 
     if(!genre) {
